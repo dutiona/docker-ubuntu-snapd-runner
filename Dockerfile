@@ -11,7 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update && apt-get dist-upgrade -y && apt-get upgrade -y
 RUN apt-get install -y \
     build-essential binutils git fuse squashfuse snapcraft snapd snap-confine python python-pip python3 python3-pip
-RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y && apt-get autoclean -y && rm -rf /var/lib/apt/lists/
+RUN apt-get update && apt-get upgrade -y 
+
+# Clean
+RUN apt-get autoremove -y && apt-get autoclean -y
+# RUN rm -rf /var/lib/apt/lists/
+
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
 # Install python packages
